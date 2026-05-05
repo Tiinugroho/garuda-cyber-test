@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: garuda_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel_db}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-root}
+    ports:
+      - "3306:3306"
+    volumes:
+      - garuda_db_data:/var/lib/mysql
+
+  backend:
+    image: bitnami/laravel:latest
+    container_name: garuda_backend
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-laravel_db}
+      - DB_USERNAME=root
+      - DB_PASSWORD=${DB_PASSWORD:-root}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./laravel:/app
+    command: >
+      bash -c "composer install 
+      && php artisan migrate --force 
+      && php artisan serve --host=0.0.0.0 --port=8000"
+
+  frontend:
+    image: node:22-alpine
+    container_name: garuda_frontend
+    working_dir: /app
+    volumes:
+      - ./nextjs:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: sh -c "npm install && npm run dev"
+
+volumes:
+  garuda_db_data:
