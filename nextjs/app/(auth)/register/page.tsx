@@ -42,7 +42,6 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        {/* Hapus shadow-2xl, ganti dengan border */}
         <div className="card bg-base-100 w-full max-w-sm shrink-0 border border-base-300 rounded-box">
           <form onSubmit={handleRegister} className="card-body">
             <fieldset className="fieldset">
@@ -106,7 +105,6 @@ export default function RegisterPage() {
                 <Link href="/login" className="link link-hover text-primary font-semibold">Sign In</Link>
               </div>
 
-              {/* Tombol menggunakan class btn-outline */}
               <button type="submit" className="btn btn-outline btn-primary mt-4 w-full" disabled={loading}>
                 {loading ? <span className="loading loading-spinner"></span> : "Register"}
               </button>

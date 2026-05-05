@@ -43,7 +43,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Hapus shadow-2xl, ganti dengan border yang rapi agar terlihat flat */}
         <div className="card bg-base-100 w-full max-w-sm shrink-0 border border-base-300 rounded-box">
           <form onSubmit={handleLogin} className="card-body">
             <fieldset className="fieldset">
@@ -91,7 +90,6 @@ export default function LoginPage() {
                 <Link href="/register" className="link link-hover text-primary font-semibold">Sign Up</Link>
               </div>
 
-              {/* Tombol menggunakan class btn-outline */}
               <button type="submit" className="btn btn-outline btn-primary mt-4 w-full" disabled={loading}>
                 {loading ? <span className="loading loading-spinner"></span> : "Login"}
               </button>

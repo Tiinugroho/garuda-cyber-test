@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('user')->latest()->paginate(10); // Pagination server-side[cite: 1]
+        $posts = $request->user()
+                    ->posts()
+                    ->with('user')
+                    ->latest()
+                    ->paginate(10);
         return PostResource::collection($posts);
     }
 
@@ -27,7 +31,7 @@ class PostController extends Controller
         return response()->json([
             'message' => 'Post created successfully',
             'data' => new PostResource($post->load('user'))
-        ], 201); // 201 Created[cite: 1]
+        ], 201);
     }
 
     public function show(Post $post)
@@ -37,8 +41,7 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        Gate::authorize('update', $post); // Cek kepemilikan[cite: 1]
-
+        Gate::authorize('update', $post);
         $validated = $request->validate([
             'title' => 'sometimes|required|string|max:255',
             'content' => 'sometimes|required|string',
@@ -54,7 +57,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        Gate::authorize('delete', $post); // Cek kepemilikan[cite: 1]
+        Gate::authorize('delete', $post);
 
         $post->delete();
 
