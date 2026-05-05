@@ -12,14 +12,14 @@ Aplikasi web untuk manajemen artikel (Post) yang mengimplementasikan arsitektur 
    - Menghapus post (proteksi otorisasi kepemilikan).
 
 ## Tech Stack
-- Backend: Laravel 13, MySQL/PostgreSQL, Laravel Sanctum (Token-based Auth).
+- Backend: Laravel 13, MySQL, Laravel Sanctum (Token-based Auth).
 - Frontend: Next.js 16.2.4 (App Router), React, Tailwind CSS, DaisyUI, Axios.
 
 ---
 
 ## Cara Menginstal dan Menjalankan Proyek
 
-Pastikan Anda telah menginstal PHP, Composer, Node.js, dan MySQL/PostgreSQL di sistem Anda.
+Pastikan telah menginstal PHP, Composer, Node.js, dan MySQL di sistem.
 
 ### Bagian 1: Backend (Laravel)
 1. Buka terminal dan masuk ke direktori backend:
@@ -28,7 +28,7 @@ cd laravel
 composer install
 3. Salin file environment dan atur konfigurasi database:
 cp .env.example .env
-*Buka file `.env` dan sesuaikan `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` dengan database lokal Anda.*
+*Buka file `.env` dan sesuaikan `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` dengan database lokal.*
 4. Generate *Application Key*:
 php artisan key:generate
 5. Jalankan migrasi database untuk membuat tabel-tabel yang dibutuhkan
